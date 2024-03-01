@@ -29,7 +29,7 @@ class UserService
             }
             if(!$user_data)
             {
-                $user_data = UserData::create($data);
+                UserData::create($data);
             }
             else{
                 $user_data->update($data);
@@ -46,7 +46,7 @@ class UserService
 
             }
             DB::commit();
-            return ['user' => $user, 'data' => $user_data, 'code' => 200];
+            return ['user' => $user, 'code' => 200];
         }
         catch (\Exception $exception)
         {
