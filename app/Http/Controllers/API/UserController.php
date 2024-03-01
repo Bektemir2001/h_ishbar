@@ -25,7 +25,11 @@ class UserController extends Controller
         $result = $this->userService->saveData($data, config('app.user'));
         if($result['code'] == 200)
         {
-            return response(['data' => $result['user']]);
+            return response(['data' => [
+                "user" => $result['user'],
+                "user_data" => $result['user_data'],
+                "tags" => $result['user']->tags
+            ]]);
         }
         return response(['message' => $result['message']])->setStatusCode($result['code']);
     }
@@ -33,7 +37,11 @@ class UserController extends Controller
     public function getData()
     {
         $user = User::where('id', config('app.user'))->first();
-        return response(['data' => $user]);
+        return response(['data' => [
+            "user" => $user,
+            "user_data" => $user->data,
+            "tags" => $user->tags
+        ]]);
 
     }
 }
