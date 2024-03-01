@@ -22,7 +22,11 @@ class DataRequest extends FormRequest
     public function rules(): array
     {
         return [
-            ''
+            'phone_number' => 'nullable',
+            'birth_day' => 'nullable',
+            'x' => 'nullable',
+            'y' => 'nullable',
+            'image' => 'nullable'
         ];
     }
 }
