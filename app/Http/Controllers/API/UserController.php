@@ -17,22 +17,20 @@ class UserController extends Controller
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
-        $this->user = config('app.user');
     }
 
     public function saveData(DataRequest $request)
     {
         $data = $request->validated();
-        $result = $this->userService->saveData($data, $this->user);
+        $result = $this->userService->saveData($data, config('app.user'));
         return response(['message' => $result['message']])->setStatusCode($result['code']);
     }
 
     public function getData()
     {
-        dd($this->user, config('app.user'));
         return response([
-            'data' => ['user' => User::where('id', $this->user)->first(),
-                       'data' => UserData::where('user_id', $this->user)->first()
+            'data' => ['user' => User::where('id', config('app.user'))->first(),
+                       'data' => UserData::where('user_id', config('app.user'))->first()
             ]]);
 
     }
