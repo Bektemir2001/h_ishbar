@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        $data = $request->validate(['name' => 'required', 'email' => 'password', 'password' => 'required']);
+        $data = $request->validate(['name' => 'required', 'email' => 'required|unique:users', 'password' => 'required']);
         try {
             $user = User::create($data);
             return response(['user_id' => $user->id]);
