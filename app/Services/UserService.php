@@ -45,6 +45,7 @@ class UserService
                 }
 
             }
+            $user->save();
             DB::commit();
             return ['user' => $user, 'code' => 200];
         }
