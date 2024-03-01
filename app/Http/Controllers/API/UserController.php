@@ -23,6 +23,7 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $result = $this->userService->saveData($data, config('app.user'));
+        dd($result);
         if($result['code'] == 200)
         {
             return response(['data' => $result]);
