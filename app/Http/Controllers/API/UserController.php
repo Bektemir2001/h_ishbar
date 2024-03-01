@@ -12,21 +12,27 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     protected UserService $userService;
+    protected User $user;
 
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
+        $this->user = config('app.user');
     }
 
-    public function saveData(DataRequest $request, User $user)
+    public function saveData(DataRequest $request)
     {
         $data = $request->validated();
-        $result = $this->userService->saveData($data, $user);
+        $result = $this->userService->saveData($data, $this->user);
         return response(['message' => $result['message']])->setStatusCode($result['code']);
     }
 
-    public function getData(User $user)
+    public function getData()
     {
-        return response(['data' => ['user' => $user, 'data' => UserData::where('user_id')->first()]]);
+        return response([
+            'data' => ['user' => User::where('id', $this->user)->first(),
+                       'data' => UserData::where('user_id', $this->user)->first()
+            ]]);
+
     }
 }
