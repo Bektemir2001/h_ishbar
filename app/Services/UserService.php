@@ -45,7 +45,7 @@ class UserService
                 }
 
             }
-            $user->save();
+            $user = User::where('id', $user->id)->first();
             DB::commit();
             return ['user' => $user, 'code' => 200];
         }
