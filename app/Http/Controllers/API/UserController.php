@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\DataRequest;
 use App\Models\User;
+use App\Models\UserData;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -22,5 +23,10 @@ class UserController extends Controller
         $data = $request->validated();
         $result = $this->userService->saveData($data, $user);
         return response(['message' => $result['message']])->setStatusCode($result['code']);
+    }
+
+    public function getData(User $user)
+    {
+        return response(['data' => ['user' => $user, 'data' => UserData::where('user_id')->first()]]);
     }
 }
