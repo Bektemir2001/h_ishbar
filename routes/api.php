@@ -25,7 +25,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::group(['middleware' => 'user_auth'], function (){
     Route::group(['prefix' => 'user'], function (){
         Route::get('/get/data', [UserController::class, 'getData']);
-        Route::get('/save/data', [UserController::class, 'saveData']);
+        Route::post('/save/data', [UserController::class, 'saveData']);
     });
 });
 
