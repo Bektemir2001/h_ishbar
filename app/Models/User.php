@@ -21,8 +21,23 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status',
+        'role'
     ];
 
+
+    static $ROLES = ['USER', 'EMPLOYER', 'ADMIN'];
+    static $STATUS = ['ACTIVE', 'BLOCK'];
+
+    public function getStatusAttribute($value)
+    {
+        return self::$STATUS[$value];
+    }
+
+    public function getRoleAttribute($value)
+    {
+        return self::$ROLES[$value];
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
