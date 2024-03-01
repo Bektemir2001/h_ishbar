@@ -32,10 +32,9 @@ class UserController extends Controller
 
     public function getData()
     {
+        $user = User::where('id', config('app.user'))->first();
         return response([
-            'data' => ['user' => User::where('id', config('app.user'))->first(),
-                       'data' => UserData::where('user_id', config('app.user'))->first()
-            ]]);
+            'data' => $user ]);
 
     }
 }
