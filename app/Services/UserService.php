@@ -30,7 +30,7 @@ class UserService
             else{
                 $user_data->update($data);
             }
-            return ['user' => User::where('id', $user)->first(), 'user_data' => $user_data, 'code' => 200];
+            return ['user' => User::where('id', $user)->first(), 'data' => $user_data, 'code' => 200];
         }
         catch (\Exception $exception)
         {
