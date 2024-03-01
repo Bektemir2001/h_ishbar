@@ -25,12 +25,12 @@ class UserService
             }
             if(!$user_data)
             {
-                UserData::create($data);
+                $user_data = UserData::create($data);
             }
             else{
                 $user_data->update($data);
             }
-            return ['message' => 'success', 'code' => 200];
+            return ['user' => User::where('id', $user)->first(), 'user_data' => $user_data, 'code' => 200];
         }
         catch (\Exception $exception)
         {
