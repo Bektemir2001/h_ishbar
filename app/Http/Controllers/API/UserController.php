@@ -22,6 +22,7 @@ class UserController extends Controller
     public function saveData(DataRequest $request)
     {
         $data = $request->validated();
+        dd($data);
         $result = $this->userService->saveData($data, config('app.user'));
         if($result['code'] == 200)
         {
