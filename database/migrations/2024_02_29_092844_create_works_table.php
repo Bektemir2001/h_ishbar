@@ -19,14 +19,20 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->date('start_work');
             $table->integer('amount');
+            $table->string('x');
+            $table->string('y');
             $table->integer('price')->nullable();
             $table->integer('status')->default(0); //0-open, 1-closed
             $table->timestamps();
 
             $table->index('employer_id');
+            $table->index('category_id');
             $table->foreign('employer_id')
-                ->on('user')
-                ->references('id')
+                ->on('users')
+                ->references('id');
+            $table->foreign('category_id')
+                    ->on('work_categories')
+                    ->references('id')
                 ->cascadeOnDelete();
         });
     }

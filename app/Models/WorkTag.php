@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class WorkTag extends Model
 {
     use HasFactory;
+
+    protected $table = 'work_tags';
+    protected $guarded = false;
 }
