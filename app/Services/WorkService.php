@@ -8,12 +8,12 @@ use App\Models\WorkStatement;
 
 class WorkService
 {
-    public function saveWork(array $data, User $user)
+    public function saveWork(array $data, int $user)
     {
         try {
-            $data['employer_id'] = $user->id;
-            Work::create($data);
-            return ['message' => 'success', 'code' => 200];
+            $data['employer_id'] = $user;
+            $work = Work::create($data);
+            return ['message' => 'success', 'work' => $work, 'code' => 200];
         }
         catch (\Exception $exception)
         {

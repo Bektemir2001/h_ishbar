@@ -26,7 +26,8 @@ class DataRequest extends FormRequest
             'birth_day' => 'nullable',
             'x' => 'nullable',
             'y' => 'nullable',
-            'image' => 'nullable'
+            'image' => 'nullable',
+            'tags' => 'nullable'
         ];
     }
 }

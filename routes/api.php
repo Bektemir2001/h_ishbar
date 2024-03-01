@@ -21,7 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-
+Route::get('/categories', [\App\Http\Controllers\API\WorkCategoryController::class, 'index']);
+Route::get('/tags', [\App\Http\Controllers\API\TagController::class, 'index']);
 Route::group(['middleware' => 'user_auth'], function (){
     Route::group(['prefix' => 'user'], function (){
         Route::get('/get/data', [UserController::class, 'getData']);

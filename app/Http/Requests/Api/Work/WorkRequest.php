@@ -3,7 +3,8 @@
 namespace App\Http\Requests\Api\Work;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 class WorkRequest extends FormRequest
 {
     /**
@@ -22,7 +23,23 @@ class WorkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'start_work' => 'required',
+            'title' => 'required',
+            'description' => 'nullable',
+            'category_id' => 'required',
+            'amount' => 'required',
+            'price' => 'required',
+            'tags' => 'required',
+            'x' => 'required',
+            'y' => 'required'
         ];
+    }
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success'   => false,
+            'message'   => 'Validation errors',
+            'data'      => $validator->errors()
+        ])->setStatusCode(403));
     }
 }
