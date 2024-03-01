@@ -36,7 +36,7 @@ class User extends Authenticatable
 
     public function tags()
     {
-        return $this->belongsTo(Tag::class, 'user_tags');
+        return $this->belongsToMany(Tag::class, 'user_tags');
     }
 
     public function getRoleAttribute($value)
