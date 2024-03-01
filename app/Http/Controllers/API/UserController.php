@@ -29,6 +29,7 @@ class UserController extends Controller
 
     public function getData()
     {
+        dd($this->user, config('app.user'));
         return response([
             'data' => ['user' => User::where('id', $this->user)->first(),
                        'data' => UserData::where('user_id', $this->user)->first()
