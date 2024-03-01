@@ -36,7 +36,14 @@ class UserService
             }
             $user = User::where('id', $user)->first();
             if (!empty($tags)) {
-                $user->tags()->sync($tags);
+                if($user->tags)
+                {
+                    $user->tags()->sync($tags);
+                }
+                else{
+                    $user->tags()->attach($tags);
+                }
+
             }
             DB::commit();
             return ['user' => $user, 'data' => $user_data, 'code' => 200];
