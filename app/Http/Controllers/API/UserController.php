@@ -25,11 +25,7 @@ class UserController extends Controller
         $result = $this->userService->saveData($data, config('app.user'));
         if($result['code'] == 200)
         {
-            return response(['data' => [
-                "user" => $result['user'],
-                "user_data" => $result['user_data'],
-                "tags" => $result['user']->tags
-            ]]);
+            return response(['data' => $result['user']]);
         }
         return response(['message' => $result['message']])->setStatusCode($result['code']);
     }
