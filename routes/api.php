@@ -19,10 +19,13 @@ use App\Http\Controllers\API\Auth\UserController as AuthController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::group(['prefix' => 'user'], function (){
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::get('/{user}', [UserController::class, 'getData']);
-    Route::get('/save/data/{user}', [UserController::class, 'saveData']);
+Route::group(['middleware' => 'user_auth'], function (){
+    Route::group(['prefix' => 'user'], function (){
+        Route::get('/get/data', [UserController::class, 'getData']);
+        Route::get('/save/data', [UserController::class, 'saveData']);
+    });
 });
+
