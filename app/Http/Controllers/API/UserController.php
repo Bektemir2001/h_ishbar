@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     protected UserService $userService;
-    protected User $user;
+    protected int $user;
 
     public function __construct(UserService $userService)
     {
