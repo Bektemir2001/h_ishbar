@@ -17,6 +17,10 @@ class Work extends Model
         return $this->belongsToMany(Tag::class, 'work_tags');
     }
 
+    public function category()
+    {
+        return $this->belongsTo(WorkCategory::class);
+    }
     public function getStatusAttribute($value)
     {
         return self::$STATUS[$value];
