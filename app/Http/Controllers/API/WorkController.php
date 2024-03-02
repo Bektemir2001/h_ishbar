@@ -30,6 +30,7 @@ class WorkController extends Controller
     {
         $data = $request->validated();
         $result = $this->workService->saveWork($data, config('app.user'));
+        dd($result);
         return response(['message' => $result['message']])->setStatusCode($result['code']);
     }
 

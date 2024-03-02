@@ -70,8 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
-
+    'timezone' => 'Asia/Bishkek',
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
