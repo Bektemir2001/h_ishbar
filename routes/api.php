@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\WorkController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\UserController as AuthController;
@@ -27,6 +28,10 @@ Route::group(['middleware' => 'user_auth'], function (){
     Route::group(['prefix' => 'user'], function (){
         Route::get('/get/data', [UserController::class, 'getData']);
         Route::post('/save/data', [UserController::class, 'saveData']);
+    });
+
+    Route::group(['prefix' => 'work'], function (){
+        Route::post('/create', [WorkController::class, 'createWork']);
     });
 });
 

@@ -32,4 +32,17 @@ class WorkService
             return ['message' => $exception->getMessage(), 'code' => $exception->getCode()];
         }
     }
+
+    public function getWorks(array $filter, int $user)
+    {
+        try {
+            $data = Work::all();
+            return ['data' => $data, 'code' => 200];
+        }
+        catch (\Exception $exception)
+        {
+            return ['data' => $exception->getMessage(), 'code' => $exception->getCode()];
+        }
+
+    }
 }

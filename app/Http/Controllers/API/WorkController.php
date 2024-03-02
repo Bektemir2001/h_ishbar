@@ -19,6 +19,13 @@ class WorkController extends Controller
         $this->workService = $workService;
     }
 
+
+    public function getWorks(WorkRequest $request)
+    {
+        $filter = $request->validated();
+        $result = $this->workService->getWorks($filter, config('app.user'));
+        return response(['data' => $result['data']])->setStatusCode($result['code']);
+    }
     public function createWork(WorkRequest $request)
     {
         $data = $request->validated();
