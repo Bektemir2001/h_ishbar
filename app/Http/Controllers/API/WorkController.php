@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Work\FilterRequest;
 use App\Http\Requests\Api\Work\WorkRequest;
 use App\Models\User;
 use App\Models\Work;
@@ -20,7 +21,7 @@ class WorkController extends Controller
     }
 
 
-    public function getWorks(WorkRequest $request)
+    public function getWorks(FilterRequest $request)
     {
         $filter = $request->validated();
         $result = $this->workService->getWorks($filter, config('app.user'));
