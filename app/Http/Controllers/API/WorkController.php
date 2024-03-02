@@ -30,7 +30,7 @@ class WorkController extends Controller
     {
         $data = $request->validated();
         $result = $this->workService->saveWork($data, config('app.user'));
-        if($result['code'])
+        if($result['code'] == 200)
         {
             return response(['data' => $result['work']]);
         }
