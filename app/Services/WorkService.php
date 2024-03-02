@@ -54,6 +54,28 @@ class WorkService
                 {
                     $data = Work::where('price', '>=', $filter['price']);
                 }
+                if(isset($data['categories']))
+                {
+                    $data = $data->whereIn('category_id', $data['categories']);
+                }
+                if(isset($data['tags']))
+                {
+                    $tags = $data['tags'];
+                    $data = $data->whereHas('tags', function ($query) use ($tags) {
+                        $query->whereIn('tag_id', $tags);
+                    });;
+                }
+                if($data['radius'])
+                {
+                    $radius = $data['radius'];
+                    $x = $data['x'];
+                    $y = $data['y'];
+                    $data = $data->addSelect([
+                        '*',
+                        DB::raw("(6371 * acos(cos(radians($x)) * cos(radians(x)) * cos(radians(y) - radians($y)) + sin(radians($x)) * sin(radians(x)))) AS distance")
+                    ])
+                        ->having('distance', '<=', $radius);
+                }
                 return ['data' => $data->get(), 'code' => 200];
 
             }

@@ -25,7 +25,9 @@ class FilterRequest extends FormRequest
             'price' => 'nullable',
             'radius' => 'nullable',
             'tags' => 'nullable',
-            'categories' => 'nullable'
+            'categories' => 'nullable',
+            'x' => 'nullable',
+            'y' => 'nullable',
         ];
     }
 }
