@@ -10,7 +10,7 @@ class Work extends Model
     use HasFactory;
     protected $table = 'works';
     protected $guarded = false;
-
+    protected $with = ['tags', 'category'];
     static $STATUS = ['OPEN', 'CLOSED', 'FINISHED'];
     public function tags()
     {
