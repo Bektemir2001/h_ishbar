@@ -56,14 +56,20 @@ class WorkService
                 }
                 if(isset($data['categories']))
                 {
-                    $data = $data->whereIn('category_id', $data['categories']);
+                    if(count($data['categories']))
+                    {
+                        $data = $data->whereIn('category_id', $data['categories']);
+                    }
                 }
                 if(isset($data['tags']))
                 {
                     $tags = $data['tags'];
-                    $data = $data->whereHas('tags', function ($query) use ($tags) {
-                        $query->whereIn('tag_id', $tags);
-                    });;
+                    if(count($tags))
+                    {
+                        $data = $data->whereHas('tags', function ($query) use ($tags) {
+                            $query->whereIn('tag_id', $tags);
+                        });
+                    }
                 }
                 if($data['radius'])
                 {
