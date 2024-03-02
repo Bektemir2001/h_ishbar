@@ -31,10 +31,10 @@ class WorkService
         }
     }
 
-    public function statement(Work $work, User $user)
+    public function statement(Work $work, int $user)
     {
         try {
-            WorkStatement::create(['work_id' => $work, 'user_id' => $user->id]);
+            WorkStatement::create(['work_id' => $work->id, 'user_id' => $user]);
             return ['message' => 'success', 'code' => 200];
         }
         catch (\Exception $exception)
@@ -86,11 +86,11 @@ class WorkService
                     ])
                         ->having('distance', '<=', $radius);
                 }
-                return ['data' => $data->get(), 'code' => 200];
+                return ['data' => $data->where('status', 0)->get(), 'code' => 200];
 
             }
             else{
-                return ['data' => Work::all(), 'code' => 200];
+                return ['data' => Work::where('status', 0), 'code' => 200];
             }
 
         }

@@ -38,9 +38,11 @@ class WorkController extends Controller
         return response(['message' => $result['message']])->setStatusCode($result['code']);
     }
 
-    public function workStatement(Work $work, User $user)
+    public function workStatement(Work $work)
     {
-        $result = $this->workService->statement($work, $user);
+        $result = $this->workService->statement($work, config('app.user'));
         return response(['message' => $result['message']])->setStatusCode($result['code']);
     }
+
+
 }
