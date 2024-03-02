@@ -16,7 +16,7 @@ class Work extends Model
     protected $with = ['tags', 'category'];
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'work_tags')->select('id', 'select');
+        return $this->belongsToMany(Tag::class, 'work_tags')->select('id', 'name');
     }
 
     public function category()
