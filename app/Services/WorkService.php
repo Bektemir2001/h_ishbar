@@ -46,8 +46,21 @@ class WorkService
     public function getWorks(array $filter, int $user)
     {
         try {
-            $data = Work::all();
-            return ['data' => $data, 'code' => 200];
+
+            if(count($filter))
+            {
+                $data = Work::class;
+                if(isset($filter['price']))
+                {
+                    $data = Work::where('price', '>=', $filter['price']);
+                }
+                return ['data' => $data->get(), 'code' => 200];
+
+            }
+            else{
+                return ['data' => Work::all(), 'code' => 200];
+            }
+
         }
         catch (\Exception $exception)
         {
