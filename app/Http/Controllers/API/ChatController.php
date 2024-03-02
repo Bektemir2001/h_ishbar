@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\SendMessageEvent;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\ChatService;
@@ -26,6 +27,7 @@ class ChatController extends Controller
     {
         $data = $request->validate(['message' => 'required']);
         $result = $this->chatService->sendMessage(config('app.user'), $user->id, $data['message']);
+        broadcast(new SendMessageEvent($user->id, $data['message']));
         return response(['message' => $result['message']])->setStatusCode($result['code']);
     }
 }

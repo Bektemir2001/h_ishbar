@@ -37,7 +37,7 @@ class ChatService
                 'to_user' => $to_user,
                 'message' => $message
                 ]);
-            broadcast(new SendMessageEvent($to_user, $message));
+
             return ['message' => 'success', 'code' => 200];
         }
         catch (\Exception $exception)
