@@ -10,16 +10,18 @@ class Work extends Model
     use HasFactory;
     protected $table = 'works';
     protected $guarded = false;
-    protected $with = ['tags', 'category'];
+
     static $STATUS = ['OPEN', 'CLOSED', 'FINISHED'];
+
+    protected $with = ['tags', 'category'];
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'work_tags');
+        return $this->belongsToMany(Tag::class, 'work_tags')->select('id', 'select');
     }
 
     public function category()
     {
-        return $this->belongsTo(WorkCategory::class);
+        return $this->belongsTo(WorkCategory::class)->select('id', 'name');
     }
     public function getStatusAttribute($value)
     {
