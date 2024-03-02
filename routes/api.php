@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ChatController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\WorkController;
 use Illuminate\Http\Request;
@@ -34,6 +35,11 @@ Route::group(['middleware' => 'user_auth'], function (){
         Route::post('/create', [WorkController::class, 'createWork']);
         Route::get('/get', [WorkController::class, 'getWorks']);
         Route::get('/statement/{work}', [WorkController::class, 'workStatement']);
+    });
+
+    Route::group(['prefix' => 'chat'], function (){
+        Route::get('/get/{user}', [ChatController::class, 'index']);
+        Route::post('/send/{user}', [ChatController::class, 'sendMessage']);
     });
 });
 

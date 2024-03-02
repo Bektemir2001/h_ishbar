@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('from_user');
             $table->unsignedBigInteger('to_user');
             $table->unsignedBigInteger('work_id')->nullable();
+            $table->text('message');
             $table->timestamps();
         });
     }
