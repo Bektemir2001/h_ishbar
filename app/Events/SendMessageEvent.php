@@ -45,7 +45,7 @@ class SendMessageEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('send-message'.$this->user),
+            new Channel('send-message'),
         ];
     }
 }
