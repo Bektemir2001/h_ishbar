@@ -50,9 +50,13 @@ class WorkService
             if(count($filter))
             {
                 $data = Work::query();
-                if(isset($filter['price']))
+                if(isset($filter['from_price']))
                 {
-                    $data = Work::where('price', '>=', $filter['price']);
+                    $data = Work::where('price', '>=', $filter['from_price']);
+                }
+                if(isset($filter['to_price']))
+                {
+                    $data = Work::where('price', '<=', $filter['to_price']);
                 }
                 if(isset($filter['categories']))
                 {
@@ -78,7 +82,7 @@ class WorkService
                     $y = floatval($filter['y']);
                     $data = $data->addSelect([
                         '*',
-                        DB::raw("(6371000 * acos(cos(radians($x)) * cos(radians(CAST(`x` AS DECIMAL(10, 6)))) * cos(radians(CAST(`y` AS DECIMAL(10, 6))) - radians($y)) + sin(radians($x)) * sin(radians(CAST(`x` AS DECIMAL(10, 6)))))) AS distance")
+                        DB::raw("(6371 * acos(cos(radians($x)) * cos(radians(CAST(`x` AS DECIMAL(10, 6)))) * cos(radians(CAST(`y` AS DECIMAL(10, 6))) - radians($y)) + sin(radians($x)) * sin(radians(CAST(`x` AS DECIMAL(10, 6)))))) AS distance")
                     ])
                         ->having('distance', '<=', $radius);
                 }
