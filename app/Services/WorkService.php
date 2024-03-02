@@ -74,12 +74,12 @@ class WorkService
                 if($filter['radius'])
                 {
                     $radius = $filter['radius'];
-                    $x = $filter['x'];
-                    $y = $filter['y'];
-                    $data = $data->addSelect([
-                        '*',
-                        DB::raw("(6371 * acos(cos(radians($x)) * cos(radians(x)) * cos(radians(y) - radians($y)) + sin(radians($x)) * sin(radians(x)))) AS distance")
-                    ])
+                    $x = floatval($data['x']);
+                    $y = floatval($data['y']);
+                    $data = $data->selectRaw("
+                            *,
+                            (6371 * acos(cos(radians(CAST($x AS DECIMAL(10, 6)))) * cos(radians(x)) * cos(radians(y) - radians(CAST($y AS DECIMAL(10, 6)))) + sin(radians(CAST($x AS DECIMAL(10, 6)))) * sin(radians(x)))) AS distance
+                        ")
                         ->having('distance', '<=', $radius);
                 }
                 return ['data' => $data->get(), 'code' => 200];
