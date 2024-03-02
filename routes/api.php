@@ -30,8 +30,9 @@ Route::group(['middleware' => 'user_auth'], function (){
         Route::post('/save/data', [UserController::class, 'saveData']);
     });
 
-    Route::group(['prefix' => 'work'], function (){
+    Route::group(['prefix' => 'works'], function (){
         Route::post('/create', [WorkController::class, 'createWork']);
+        Route::post('/get', [WorkController::class, 'getWorks']);
     });
 });
 
