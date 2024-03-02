@@ -54,16 +54,16 @@ class WorkService
                 {
                     $data = Work::where('price', '>=', $filter['price']);
                 }
-                if(isset($data['categories']))
+                if(isset($filter['categories']))
                 {
-                    if(count($data['categories']))
+                    if(count($filter['categories']))
                     {
-                        $data = $data->whereIn('category_id', $data['categories']);
+                        $data = $data->whereIn('category_id', $filter['categories']);
                     }
                 }
-                if(isset($data['tags']))
+                if(isset($filter['tags']))
                 {
-                    $tags = $data['tags'];
+                    $tags = $filter['tags'];
                     if(count($tags))
                     {
                         $data = $data->whereHas('tags', function ($query) use ($tags) {
@@ -71,11 +71,11 @@ class WorkService
                         });
                     }
                 }
-                if($data['radius'])
+                if($filter['radius'])
                 {
-                    $radius = $data['radius'];
-                    $x = $data['x'];
-                    $y = $data['y'];
+                    $radius = $filter['radius'];
+                    $x = $filter['x'];
+                    $y = $filter['y'];
                     $data = $data->addSelect([
                         '*',
                         DB::raw("(6371 * acos(cos(radians($x)) * cos(radians(x)) * cos(radians(y) - radians($y)) + sin(radians($x)) * sin(radians(x)))) AS distance")
