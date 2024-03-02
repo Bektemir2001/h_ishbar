@@ -32,7 +32,7 @@ Route::group(['middleware' => 'user_auth'], function (){
 
     Route::group(['prefix' => 'works'], function (){
         Route::post('/create', [WorkController::class, 'createWork']);
-        Route::post('/get', [WorkController::class, 'getWorks']);
+        Route::get('/get', [WorkController::class, 'getWorks']);
     });
 });
 
