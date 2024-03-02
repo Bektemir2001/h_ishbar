@@ -25,6 +25,7 @@ class WorkController extends Controller
     {
         $filter = $request->validated();
         $result = $this->workService->getWorks($filter, config('app.user'));
+        dd($result);
         return response(['data' => $result['data']])->setStatusCode($result['code']);
     }
     public function createWork(WorkRequest $request)

@@ -78,7 +78,7 @@ class WorkService
                     $y = floatval($filter['y']);
                     $data = $data->addSelect([
                         '*',
-                        DB::raw("(6371 * acos(cos(radians($x)) * cos(radians(x)) * cos(radians(y) - radians($y)) + sin(radians($x)) * sin(radians(x)))) AS distance")
+                        DB::raw("(6371 * acos(cos(radians($x)) * cos(radians(CAST(`x` AS DECIMAL(10, 6)))) * cos(radians(CAST(`y` AS DECIMAL(10, 6))) - radians($y)) + sin(radians($x)) * sin(radians(CAST(`x` AS DECIMAL(10, 6)))))) AS distance")
                     ])
                         ->having('distance', '<=', $radius);
                 }
