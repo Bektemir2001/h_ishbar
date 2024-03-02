@@ -49,7 +49,7 @@ class WorkService
 
             if(count($filter))
             {
-                $data = Work::class;
+                $data = Work::query();
                 if(isset($filter['price']))
                 {
                     $data = Work::where('price', '>=', $filter['price']);
