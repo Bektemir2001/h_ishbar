@@ -74,8 +74,8 @@ class WorkService
                 if($filter['radius'])
                 {
                     $radius = $filter['radius'];
-                    $x = floatval($data['x']);
-                    $y = floatval($data['y']);
+                    $x = $data['x'];
+                    $y = $data['y'];
                     $data = $data->selectRaw("
                             *,
                             (6371 * acos(cos(radians(CAST($x AS DECIMAL(10, 6)))) * cos(radians(x)) * cos(radians(y) - radians(CAST($y AS DECIMAL(10, 6)))) + sin(radians(CAST($x AS DECIMAL(10, 6)))) * sin(radians(x)))) AS distance
